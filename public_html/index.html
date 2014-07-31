@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>MediaControl</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="css/MediaControl.css" media="all" rel="stylesheet" type="text/css" />
+                <script src="js/libs/jquery/jquery.js"></script>
+                <style>
+                        #exp{
+                                width: 100%;
+                                height:100%;
+                                border:0px solid #000;
+                        }
+                        @media only screen and (min-width: 1920px){
+                                #MediaControl{z-index: 4}
+                                #MediaControl:before{content: 'BigDesktop';}
+                        }
+                        @media only screen and (min-width: 4096px){
+                                #MediaControl{z-index: 5}
+                                #MediaControl:before{content: 'CinemaDesktop';}
+                        }
+                </style>
+        </head>
+        <body>
+                <div>MediaControl</div>
+                <div id='exp'>
+                        <p><b>What's that!?</b></p>
+                        <p>Fire some js function on the css @media change</p>
+                        <p></p>
+                        <p><b>Set custom sizes & media</b></p>
+                        <p>To set custom @media, just use this template:</p>
+                        <p>
+                                <i>CSS</i><br>
+                                <code>
+                                        @media only screen and (min-width: 8192px){<br>
+                                                #MediaControl{z-index: 6}<br>
+                                                #MediaControl:before{content: 'MonsterScreen';}<br>
+                                        } <br>
+                                </code>
+                                <i>JS</i><br>
+                                <code>
+                                        $('#exp').on('onMonsterScreen', function() {<br>
+                                                $(this).css({background: '#8800FF', color: '#000000'});<br>
+                                                alert('I\'m full of pixels!');<br>
+                                        })
+                                </code>
+                        </p>
+                        <p><b>To test</b></p>
+                        <p>
+                                To test in Firefox different screen size, press <b>Ctrl + Shift + M</b>, to add 4K display, copy and paste this string <b>about:config</b> to the url bar and hit enter, search for "devtools.responsiveUI.presets"and add to the array this string <b>,{"key":"4096x2160","width":4096,"height":2160}</b> or writing all the preset <b>[{"key":"320x480","width":320,"height":480},{"key":"360x640","width":360,"height":640},{"key":"768x1024","width":768,"height":1024},{"key":"800x1280","width":800,"height":1280},{"key":"980x1280","width":980,"height":1280},{"key":"1280x600","width":1280,"height":600},{"key":"1920x900","width":1920,"height":900},{"key":"4096x2160","width":4096,"height":2160}]</b>
+                        </p>
+                        <p>
+                                Or just resize the window! ;-)
+                        </p>
+                </div>
+                <script>
+                        $(document).ready(function() {
+
+                                $('#exp').on('onTablet', function() {
+                                        $(this).css({background: '#FF00FF', color: '#000000'});
+                                }).on('onPhone', function() {
+                                        $(this).css({background: '#0000FF', color: '#000000'});
+                                        alert('Hi, i\'m a little screen!');
+                                }).on('onNetbook', function() {
+                                        $(this).css({background: '#FF0000', color: '#000000'});
+                                }).on('onDesktop', function() {
+                                        $(this).css({background: '#FFFFFF', color: '#000000'});
+                                }).on('onBigDesktop', function() {
+                                        $(this).css({background: '#F0F0F0', color: '#000000'});
+                                }).on('onCinemaDesktop', function() {
+                                        $(this).css({background: '#000000', color: '#ffffff'});
+                                        alert('I\'m the BigOne!');
+                                });
+
+                                $('#exp').click(function() {
+                                        switch ($().MediaControl(true)) {
+                                                case 'Phone':
+                                                        $(this).fadeOut(1000).fadeIn(1000);
+                                                        break;
+                                                case 'Tablet':
+                                                        $(this).slideUp(1000).slideDown(1000);
+                                                        break;
+                                                case 'Netbook':
+                                                        $(this).animate({marginTop: '50px'}, 1000).animate({marginTop: '0px'}, 1000);
+                                                        break;
+                                                case 'Desktop':
+                                                        $(this).animate({width: '100px'}).animate({width: '100%'});
+                                                        break;
+                                                case 'BigDesktop':
+                                                        $(this).animate({marginLeft: '50px'}, 1000).animate({marginLeft: '0px'}, 1000);
+                                                        break;
+                                                case 'CinemaDesktop':
+                                                        fs = $(this).css('font-size');
+                                                        $(this).animate({fontSize: '80px'}, 1000).animate({fontSize: fs}, 1000);
+                                                        break;
+                                        }
+                                });
+                        });
+
+                </script>
+                <script src="js/MediaControl.js"></script>
+        </body>
+</html>

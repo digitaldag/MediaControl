@@ -1,0 +1,15 @@
+#MediaControl{position:absolute;top:-10000px;left:-10000px;z-index: 0;display: block;overflow: hidden;height: 1px;width: 1px;}
+#MediaControl:before{content: 'Phone';}
+
+@media only screen and (min-width: 768px){
+        #MediaControl{z-index: 1}
+        #MediaControl:before{content: 'Tablet';}
+}
+@media only screen and (min-width: 1024px){
+        #MediaControl{z-index: 2}
+        #MediaControl:before{content: 'Netbook';}
+}
+@media only screen and (min-width: 1367px){
+        #MediaControl{z-index: 3}
+        #MediaControl:before{content: 'Desktop';}
+}
